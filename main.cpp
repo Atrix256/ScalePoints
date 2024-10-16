@@ -115,26 +115,6 @@ void CalcPixelColor(float2 uv, unsigned char* RGB, const std::vector<float2> &po
 		AlphaBlend(RGB, float3{ 0.1f, 0.1f, 0.1f }, shade);
 	}
 
-	// Draw the scaled scaling vector
-	{
-		float dist = SDLineSegment(coord, float2{ 0.0f, 0.0f }, scaleVector * scaleAmount) * c_graphScale;
-
-		dist -= 0.001f;
-
-		float shade = SmoothStep(c_antiAliasSize, 0.0f, dist);
-		AlphaBlend(RGB, float3{ 0.1f, 0.9f, 0.1f }, shade);
-	}
-
-	// Draw the unscaled scaling vector
-	{
-		float dist = SDLineSegment(coord, float2{ 0.0f, 0.0f }, scaleVector) * c_graphScale;
-
-		dist -= 0.001f;
-
-		float shade = SmoothStep(c_antiAliasSize, 0.0f, dist);
-		AlphaBlend(RGB, float3{ 0.1f, 0.5f, 0.1f }, shade);
-	}
-
 	// draw points2
 	{
 		float dist = FLT_MAX;
@@ -161,6 +141,26 @@ void CalcPixelColor(float2 uv, unsigned char* RGB, const std::vector<float2> &po
 
 		float shade = SmoothStep(c_antiAliasSize, 0.0f, dist);
 		AlphaBlend(RGB, float3{ 0.9f, 0.1f, 0.1f }, shade);
+	}
+
+	// Draw the scaled scaling vector
+	{
+		float dist = SDLineSegment(coord, float2{ 0.0f, 0.0f }, scaleVector * scaleAmount) * c_graphScale;
+
+		dist -= 0.001f;
+
+		float shade = SmoothStep(c_antiAliasSize, 0.0f, dist);
+		AlphaBlend(RGB, float3{ 0.1f, 0.9f, 0.1f }, shade);
+	}
+
+	// Draw the unscaled scaling vector
+	{
+		float dist = SDLineSegment(coord, float2{ 0.0f, 0.0f }, scaleVector) * c_graphScale;
+
+		dist -= 0.001f;
+
+		float shade = SmoothStep(c_antiAliasSize, 0.0f, dist);
+		AlphaBlend(RGB, float3{ 0.1f, 0.5f, 0.1f }, shade);
 	}
 }
 
